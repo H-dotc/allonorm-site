@@ -57,7 +57,7 @@
     <!-- Aperçu scanner (bridé) -->
     <div class="tool">
       <h3>Aperçu d'accessibilité de votre site</h3>
-      <p class="hint">Un avant-goût de notre analyse&nbsp;: un score indicatif et les familles de défauts les plus fréquentes. Le diagnostic complet et détaillé est gratuit, sur demande.</p>
+      <p class="hint">Analyse réelle de la page d'accueil de votre site&nbsp;: nous téléchargeons son code et y détectons les principaux défauts d'accessibilité, comptés un par un. Le diagnostic complet (toutes pages, tous critères) est gratuit, sur demande.</p>
       <label>Adresse de votre site
         <input type="url" id="scanUrl" placeholder="https://votre-boutique.fr">
       </label>
@@ -66,7 +66,7 @@
     </div>
   </div>
 
-  <p class="disclaimer">⚠️ <strong>Ces outils ne sont qu'une simulation indicative.</strong> Ils peuvent comporter des erreurs et se fondent uniquement sur les éléments que vous saisissez&nbsp;; les montants affichés sont des ordres de grandeur réglementaires (plafonds), non un calcul de votre amende réelle. Ils ne constituent ni un audit, ni un avis juridique. Seul un audit RGAA établit votre conformité réelle.</p>
+  <p class="disclaimer">⚠️ <strong>Ces outils sont indicatifs.</strong> Le simulateur se fonde sur les seuils légaux officiels et les éléments que vous saisissez&nbsp;; les montants affichés sont des plafonds réglementaires, non un calcul de votre amende réelle. L'aperçu analyse réellement le code de votre page d'accueil, mais ne couvre qu'une partie des 106 critères RGAA (~30&nbsp;% sont automatisables). Ils ne constituent ni un audit, ni un avis juridique&nbsp;: seul un audit RGAA complet établit votre conformité réelle.</p>
 </div></section>
 
 <!-- CTA -->
@@ -128,26 +128,157 @@ function simuler(){
     'Chiffre indicatif, plafond théorique, non représentatif de votre amende réelle.</p>';
 }
 
+/* ============================================================
+   Aperçu RÉEL : télécharge le HTML de la page d'accueil du site
+   (via proxy CORS public) et exécute les mêmes contrôles statiques
+   que le moteur AlloNorm (portage JS de prescanner/checks.py,
+   score identique à prescanner/score.py).
+   ============================================================ */
+var CRITERES = {
+  img_alt_manquant:   {titre:"Images sans alternative textuelle",        grav:"critique", rgaa:"RGAA 1.1"},
+  input_image_alt:    {titre:"Boutons-images sans alternative",          grav:"critique", rgaa:"RGAA 1.1"},
+  lien_vide:          {titre:"Liens sans intitulé accessible",           grav:"critique", rgaa:"RGAA 6.1"},
+  bouton_vide:        {titre:"Boutons sans intitulé accessible",         grav:"critique", rgaa:"RGAA 7.1"},
+  champ_sans_label:   {titre:"Champs de formulaire sans étiquette",      grav:"critique", rgaa:"RGAA 11.1"},
+  html_lang_manquant: {titre:"Langue de la page non déclarée",           grav:"majeur",   rgaa:"RGAA 8.3"},
+  title_manquant:     {titre:"Titre de page absent ou vide",             grav:"majeur",   rgaa:"RGAA 8.5"},
+  h1_manquant:        {titre:"Aucun titre principal (H1)",               grav:"majeur",   rgaa:"RGAA 9.1"},
+  iframe_sans_titre:  {titre:"Cadres (iframe) sans titre",               grav:"majeur",   rgaa:"RGAA 2.1"},
+  main_manquant:      {titre:"Aucun repère de contenu principal",        grav:"mineur",   rgaa:"RGAA 12.6"},
+  declaration_absente:{titre:"Aucune déclaration d'accessibilité visible",grav:"majeur",  rgaa:"Obligation EAA"}
+};
+var POIDS = {critique:10, majeur:5, mineur:2};
+
+function nomAccessible(el){
+  if((el.textContent||'').trim()) return true;
+  if((el.getAttribute('aria-label')||'').trim()) return true;
+  if((el.getAttribute('aria-labelledby')||'').trim()) return true;
+  if((el.getAttribute('title')||'').trim()) return true;
+  var img=el.querySelector('img[alt]');
+  if(img && (img.getAttribute('alt')||'').trim()) return true;
+  if(el.querySelector('[aria-label]')) return true;
+  return false;
+}
+
+function analyserHTML(html){
+  var doc=new DOMParser().parseFromString(html,'text/html');
+  var res={};
+  function add(cid,n){ if(n>0) res[cid]=(res[cid]||0)+n; }
+  var n=0;
+  doc.querySelectorAll('img').forEach(function(i){ if(!i.hasAttribute('alt')) n++; }); add('img_alt_manquant',n);
+  n=0; doc.querySelectorAll('input[type="image"]').forEach(function(i){ if(!(i.getAttribute('alt')||'').trim()) n++; }); add('input_image_alt',n);
+  n=0; doc.querySelectorAll('a[href]').forEach(function(a){ if(a.getAttribute('aria-hidden')==='true') return; if(!nomAccessible(a)) n++; }); add('lien_vide',n);
+  n=0; doc.querySelectorAll('button').forEach(function(b){ if(b.getAttribute('aria-hidden')==='true') return; if(!nomAccessible(b)) n++; }); add('bouton_vide',n);
+  n=0;
+  var labelsFor={}; doc.querySelectorAll('label[for]').forEach(function(l){ labelsFor[l.getAttribute('for')]=1; });
+  doc.querySelectorAll('input,select,textarea').forEach(function(c){
+    var t=(c.getAttribute('type')||'text').toLowerCase();
+    if(c.tagName==='INPUT' && ['hidden','submit','button','reset','image'].indexOf(t)>=0) return;
+    if(c.id && labelsFor[c.id]) return;
+    if(c.closest('label')) return;
+    if((c.getAttribute('aria-label')||'').trim() || (c.getAttribute('aria-labelledby')||'').trim()) return;
+    if((c.getAttribute('title')||'').trim()) return;
+    n++;
+  }); add('champ_sans_label',n);
+  var htmlEl=doc.documentElement;
+  if(!((htmlEl.getAttribute('lang')||'').trim())) add('html_lang_manquant',1);
+  var ti=doc.querySelector('title');
+  if(!ti || !ti.textContent.trim()) add('title_manquant',1);
+  if(!doc.querySelector('h1')) add('h1_manquant',1);
+  n=0; doc.querySelectorAll('iframe').forEach(function(f){ if(f.getAttribute('aria-hidden')==='true') return; if(!(f.getAttribute('title')||'').trim()) n++; }); add('iframe_sans_titre',n);
+  if(!doc.querySelector('main') && !doc.querySelector('[role="main"]')) add('main_manquant',1);
+  var decla=false;
+  doc.querySelectorAll('a').forEach(function(a){
+    var s=((a.textContent||'')+' '+(a.getAttribute('href')||'')).toLowerCase();
+    if(s.indexOf('accessibilit')>=0 || s.indexOf('accessibility')>=0) decla=true;
+  });
+  if(!decla) add('declaration_absente',1);
+  return res;
+}
+
+// Score identique à prescanner/score.py : poids × (1+log10(n)), plafonné à 100.
+function scoreRisque(res){
+  var total=0;
+  for(var cid in res){
+    var nb=Math.max(1,res[cid]);
+    var f=nb>1 ? 1+Math.log(nb)/Math.LN10 : 1;
+    total += (POIDS[(CRITERES[cid]||{}).grav]||2)*f;
+  }
+  var score=Math.min(100,Math.round(total));
+  var bande = score>=75?'Critique':score>=50?'Élevé':score>=25?'Modéré':score>=1?'Faible':'Bon';
+  return {score:score,bande:bande};
+}
+
+function proxys(url){
+  return [
+    'https://api.allorigins.win/raw?url='+encodeURIComponent(url),
+    'https://corsproxy.io/?url='+encodeURIComponent(url)
+  ];
+}
+
+function fetchAvecTimeout(u,ms){
+  return new Promise(function(resolve,reject){
+    var ctl=new AbortController();
+    var t=setTimeout(function(){ctl.abort();reject(new Error('timeout'));},ms);
+    fetch(u,{signal:ctl.signal}).then(function(r){
+      clearTimeout(t);
+      if(!r.ok) return reject(new Error('http '+r.status));
+      r.text().then(resolve,reject);
+    },function(e){clearTimeout(t);reject(e);});
+  });
+}
+
 function apercu(){
   var url=(document.getElementById('scanUrl').value||'').trim();
   var box=document.getElementById('scanRes');
-  if(!url){box.hidden=false;box.innerHTML='<p>Indiquez l\'adresse de votre site.</p>';return;}
   box.hidden=false;
-  box.innerHTML='<p>Analyse en cours…</p>';
-  // VERSION DÉMO : simulation d'aperçu (le vrai moteur de scan tourne en back-office).
-  // Score pseudo-déterministe à partir de l'URL pour un rendu stable en démo.
-  var seed=0; for(var i=0;i<url.length;i++){seed=(seed+url.charCodeAt(i))%97;}
-  var score=70+(seed%30); // 70–99 : la quasi-totalité des sites e-commerce sont non conformes
-  var bande = score>=85?'Critique':(score>=60?'Élevé':'Modéré');
-  setTimeout(function(){
-    box.innerHTML='<div class="verdict ko">Score de risque estimé : '+score+'/100 — '+bande+'</div>'+
-      '<div class="bar"><span style="width:'+score+'%"></span></div>'+
-      '<p style="margin:8px 0 4px">Familles de défauts les plus probables sur ce type de site :</p>'+
-      '<ul><li>Images sans alternative textuelle</li><li>Champs de formulaire sans étiquette</li>'+
-      '<li>Contrastes insuffisants</li><li>Aucune déclaration d\'accessibilité publiée</li></ul>'+
-      '<p style="font-size:.82rem;color:#666;margin:10px 0 0">Aperçu indicatif. '+
+  if(!url){box.innerHTML='<p>Indiquez l\'adresse de votre site.</p>';return;}
+  if(!/^https?:\/\//i.test(url)) url='https://'+url;
+  box.innerHTML='<p>Téléchargement et analyse de votre page d\'accueil…</p>';
+  var tentatives=proxys(url);
+  (function essayer(i){
+    if(i>=tentatives.length){
+      box.innerHTML='<div class="verdict">Analyse en ligne indisponible pour ce site</div>'+
+        '<p>Certains sites bloquent l\'analyse depuis un navigateur. Aucun score inventé ne vous sera affiché&nbsp;: '+
+        'demandez le <strong><a href="contact.html">diagnostic complet gratuit</a></strong> — nous l\'exécutons avec notre outil professionnel et vous envoyons le rapport réel.</p>';
+      return;
+    }
+    fetchAvecTimeout(tentatives[i],15000).then(function(html){
+      if(!html || html.length<500) throw new Error('vide');
+      var res=analyserHTML(html);
+      afficher(res,url);
+    }).catch(function(){ essayer(i+1); });
+  })(0);
+
+  function afficher(res,url){
+    var cles=Object.keys(res);
+    if(!cles.length){
+      box.innerHTML='<div class="verdict ok">Aucun défaut détecté par l\'aperçu</div>'+
+        '<p>Bon signe — mais cet aperçu ne couvre qu\'une partie des 106 critères RGAA (environ 30 % sont automatisables). '+
+        'Seul un audit complet établit la conformité. Le <a href="contact.html">diagnostic approfondi est gratuit</a>.</p>';
+      return;
+    }
+    var sc=scoreRisque(res);
+    var rang={critique:0,majeur:1,mineur:2};
+    cles.sort(function(a,b){
+      var g=rang[CRITERES[a].grav]-rang[CRITERES[b].grav];
+      return g!==0?g:res[b]-res[a];
+    });
+    var top=cles.slice(0,4);
+    var lignes=top.map(function(cid){
+      var c=CRITERES[cid];
+      var occ=res[cid]>1?('<strong>'+res[cid]+'</strong> occurrences'):'constaté';
+      return '<li>'+c.titre+' — '+occ+' <span style="color:#666;font-size:.82rem">('+c.rgaa+', '+c.grav+')</span></li>';
+    }).join('');
+    var reste=cles.length-top.length;
+    box.innerHTML='<div class="verdict ko">Score de risque : '+sc.score+'/100 — '+sc.bande+'</div>'+
+      '<div class="bar"><span style="width:'+sc.score+'%"></span></div>'+
+      '<p style="margin:8px 0 4px">Défauts <strong>réellement détectés</strong> sur votre page d\'accueil&nbsp;:</p>'+
+      '<ul>'+lignes+'</ul>'+
+      (reste>0?'<p style="margin:8px 0 0">… et <strong>'+reste+' autre'+(reste>1?'s':'')+' famille'+(reste>1?'s':'')+' de défauts</strong> détectée'+(reste>1?'s':'')+', détaillée'+(reste>1?'s':'')+' dans le diagnostic complet.</p>':'')+
+      '<p style="font-size:.82rem;color:#666;margin:10px 0 0">Analyse automatique de la page d\'accueil uniquement (~30 % des critères RGAA sont automatisables). '+
       'Le <strong>diagnostic complet et détaillé est gratuit</strong> — <a href="contact.html">demandez-le ici</a>.</p>';
-  },650);
+  }
 }
 </script>
 </body>
