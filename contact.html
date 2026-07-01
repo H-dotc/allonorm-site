@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Diagnostic gratuit — AlloNorm</title>
+<meta name="description" content="Demandez votre diagnostic d'accessibilité gratuit : un rapport détaillé des non-conformités de votre site, sous 24 h ouvrées, sans engagement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="util"><div class="wrap">
+  <div class="left"><div class="square"></div><span>AlloNorm — Cabinet de conformité à l'accessibilité numérique</span></div>
+  <div>contact@allonorm.com · 06 14 75 93 30</div>
+</div></div>
+
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="index.html">
+    <div class="mark">AN</div>
+    <div>
+      <div class="name">AlloNorm</div>
+      <div class="sub">Conformité EAA · RGAA</div>
+    </div>
+  </a>
+  <nav class="main">
+    <a href="index.html">Accueil</a>
+    <a href="offres.html">Offres &amp; tarifs</a>
+    <a href="verifier.html">Vérifier mon site</a>
+    <a href="contact.html" class="cta active">Diagnostic gratuit</a>
+  </nav>
+</div></header>
+
+<!-- CTA principal -->
+<div class="cta-band"><div class="wrap">
+  <h2>Recevez votre diagnostic d'accessibilité gratuit</h2>
+  <p>Communiquez-nous l'adresse de votre boutique : nous vous transmettons un rapport détaillé de vos non-conformités, sous 24&nbsp;h ouvrées, sans engagement.</p>
+  <form class="contact-form" onsubmit="return fauxEnvoi(event)">
+    <input type="url" name="site" placeholder="https://votre-boutique.fr" required aria-label="Adresse de votre site">
+    <input type="email" name="email" placeholder="Votre email professionnel" required aria-label="Votre email professionnel">
+    <button class="btn btn-p" type="submit">Recevoir mon diagnostic gratuit</button>
+  </form>
+  <p class="form-ok" id="formOk" hidden>✓ Merci. Nous revenons vers vous sous 24&nbsp;h ouvrées avec votre rapport.</p>
+  <p style="margin-top:16px;font-size:.95rem;opacity:.9">ou directement : <a href="mailto:contact@allonorm.com" style="color:inherit"><strong>contact@allonorm.com</strong></a> · <strong>06 14 75 93 30</strong></p>
+  <p style="margin-top:6px;font-size:.78rem;opacity:.65">[Démo — formulaire à brancher sur Formspree/Web3Forms (gratuit) → livraison vers contact@allonorm.com.]</p>
+</div></div>
+
+<!-- Ce que vous recevez -->
+<section><div class="wrap">
+  <p class="kicker">Ce que vous recevez</p>
+  <h2 class="title">Un rapport concret, pas une plaquette commerciale</h2>
+  <div class="steps" style="grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Vos défauts réels</h3><p>Les non-conformités constatées sur votre site, page par page, avec captures.</p></div>
+    <div class="step"><div class="n">2</div><h3>Votre exposition</h3><p>Votre situation vis-à-vis de l'obligation légale et des contrôles DGCCRF.</p></div>
+    <div class="step"><div class="n">3</div><h3>Un plan chiffré</h3><p>Ce qu'il faut corriger, dans quel ordre, et un devis forfaitaire précis.</p></div>
+  </div>
+  <p class="sub" style="margin-top:22px">Sans engagement et sans relance agressive : vous décidez sur la base du rapport.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <div>
+    <h4>AlloNorm</h4>
+    <p style="margin:0;max-width:40ch">Cabinet spécialisé dans la mise en conformité des sites e-commerce à l'accessibilité numérique (European Accessibility Act / RGAA).</p>
+  </div>
+  <div>
+    <h4>Prestations</h4>
+    <a href="offres.html">Audit RGAA</a>
+    <a href="offres.html">Mise en conformité</a>
+    <a href="offres.html">Pack Conformité EAA</a>
+    <a href="verifier.html">Vérifier mon site</a>
+  </div>
+  <div>
+    <h4>Informations</h4>
+    <a href="index.html#cadre">Cadre légal</a>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="cgv.html">Conditions générales de vente</a>
+  </div>
+  <div class="legal">
+    AlloNorm — entreprise immatriculée — SIRET 106 456 601 00017 — TVA non applicable (art. 293 B du CGI).
+    Prestations destinées aux professionnels. Méthodologie conforme au Référentiel Général d'Amélioration de l'Accessibilité (RGAA).
+    AlloNorm est un prestataire privé indépendant et n'est pas un service de l'État.
+  </div>
+</div></footer>
+
+<script>
+function fauxEnvoi(e){
+  e.preventDefault();
+  document.querySelector('.contact-form').hidden=true;
+  document.getElementById('formOk').hidden=false;
+  return false;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vérifier mon site — AlloNorm</title>
+<meta name="description" content="Êtes-vous assujetti à l'European Accessibility Act ? Que risquez-vous ? Vérifiez votre situation en 30 secondes et obtenez un aperçu d'accessibilité de votre site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="util"><div class="wrap">
+  <div class="left"><div class="square"></div><span>AlloNorm — Cabinet de conformité à l'accessibilité numérique</span></div>
+  <div>contact@allonorm.com · 06 14 75 93 30</div>
+</div></div>
+
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="index.html">
+    <div class="mark">AN</div>
+    <div>
+      <div class="name">AlloNorm</div>
+      <div class="sub">Conformité EAA · RGAA</div>
+    </div>
+  </a>
+  <nav class="main">
+    <a href="index.html">Accueil</a>
+    <a href="offres.html">Offres &amp; tarifs</a>
+    <a href="verifier.html" class="active">Vérifier mon site</a>
+    <a href="contact.html" class="cta">Diagnostic gratuit</a>
+  </nav>
+</div></header>
+
+<div class="hero page"><div class="wrap">
+  <span class="eyebrow">Évaluation indicative · 30 secondes · gratuit</span>
+  <h1>Êtes-vous concerné, et qu'est-ce que vous risquez&nbsp;?</h1>
+  <p class="lead">Deux outils indicatifs pour situer votre exposition. Ils ne remplacent pas un audit&nbsp;: ils vous donnent un premier aperçu.</p>
+</div></div>
+
+<section id="evaluer"><div class="wrap">
+  <div class="tools">
+    <!-- Simulateur -->
+    <div class="tool">
+      <h3>Simulateur d'assujettissement &amp; de risque</h3>
+      <label>Chiffre d'affaires en ligne (€/an)
+        <input type="number" id="ca" min="0" step="10000" placeholder="ex. 3 000 000">
+      </label>
+      <label>Nombre de salariés
+        <input type="number" id="sal" min="0" step="1" placeholder="ex. 25">
+      </label>
+      <button class="btn btn-p" type="button" onclick="simuler()">Évaluer mon risque</button>
+      <div id="simRes" class="result" hidden></div>
+    </div>
+
+    <!-- Aperçu scanner (bridé) -->
+    <div class="tool">
+      <h3>Aperçu d'accessibilité de votre site</h3>
+      <p class="hint">Un avant-goût de notre analyse&nbsp;: un score indicatif et les familles de défauts les plus fréquentes. Le diagnostic complet et détaillé est gratuit, sur demande.</p>
+      <label>Adresse de votre site
+        <input type="url" id="scanUrl" placeholder="https://votre-boutique.fr">
+      </label>
+      <button class="btn btn-s" type="button" onclick="apercu()">Lancer l'aperçu</button>
+      <div id="scanRes" class="result" hidden></div>
+    </div>
+  </div>
+
+  <p class="disclaimer">⚠️ <strong>Ces outils ne sont qu'une simulation indicative.</strong> Ils peuvent comporter des erreurs et se fondent uniquement sur les éléments que vous saisissez&nbsp;; les montants affichés sont des ordres de grandeur réglementaires (plafonds), non un calcul de votre amende réelle. Ils ne constituent ni un audit, ni un avis juridique. Seul un audit RGAA établit votre conformité réelle.</p>
+</div></section>
+
+<!-- CTA -->
+<div class="cta-band"><div class="wrap">
+  <h2>Passez de l'estimation à la certitude</h2>
+  <p>Le diagnostic complet est gratuit : un rapport détaillé de vos non-conformités réelles, sans engagement.</p>
+  <a class="btn btn-p" href="contact.html">Recevoir mon diagnostic gratuit</a>
+</div></div>
+
+<footer><div class="wrap">
+  <div>
+    <h4>AlloNorm</h4>
+    <p style="margin:0;max-width:40ch">Cabinet spécialisé dans la mise en conformité des sites e-commerce à l'accessibilité numérique (European Accessibility Act / RGAA).</p>
+  </div>
+  <div>
+    <h4>Prestations</h4>
+    <a href="offres.html">Audit RGAA</a>
+    <a href="offres.html">Mise en conformité</a>
+    <a href="offres.html">Pack Conformité EAA</a>
+    <a href="verifier.html">Vérifier mon site</a>
+  </div>
+  <div>
+    <h4>Informations</h4>
+    <a href="index.html#cadre">Cadre légal</a>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="cgv.html">Conditions générales de vente</a>
+  </div>
+  <div class="legal">
+    AlloNorm — entreprise immatriculée — SIRET 106 456 601 00017 — TVA non applicable (art. 293 B du CGI).
+    Prestations destinées aux professionnels. Méthodologie conforme au Référentiel Général d'Amélioration de l'Accessibilité (RGAA).
+    AlloNorm est un prestataire privé indépendant et n'est pas un service de l'État.
+  </div>
+</div></footer>
+
+<script>
+function euros(n){return n.toLocaleString('fr-FR')+' €';}
+
+function simuler(){
+  var ca=parseFloat(document.getElementById('ca').value)||0;
+  var sal=parseInt(document.getElementById('sal').value)||0;
+  var box=document.getElementById('simRes');
+  box.hidden=false;
+  var assujetti=(sal>=10 || ca>2000000);
+  if(!assujetti){
+    box.innerHTML='<div class="verdict ok">Vous semblez exempté</div>'+
+      '<p>Avec moins de 10 salariés <em>et</em> 2 M€ de CA en ligne, votre entreprise n\'est pas assujettie. '+
+      'Attention : tout dépassement de l\'un des deux seuils vous y soumet immédiatement.</p>';
+    return;
+  }
+  // Estimation indicative (ordres de grandeur réglementaires, pas un calcul d'amende réelle)
+  box.innerHTML='<div class="verdict ko">Vous êtes assujetti à l\'EAA</div>'+
+    '<p>Au moins un seuil est dépassé (≥ 10 salariés ou &gt; 2 M€ de CA en ligne).</p>'+
+    '<div class="figure">jusqu\'à '+euros(300000)+'</div>'+
+    '<p style="margin:0 0 6px">d\'astreinte encourue (plafond réglementaire), en sus de <strong>7 500 € par manquement</strong> '+
+    '(15 000 € en récidive), sous contrôle de la DGCCRF.</p>'+
+    '<div class="bar"><span style="width:100%"></span></div>'+
+    '<p style="font-size:.82rem;color:#666;margin:8px 0 0">Échéance de conformité : 28 juin 2030 — immédiate pour tout nouveau site ou refonte. '+
+    'Chiffre indicatif, plafond théorique, non représentatif de votre amende réelle.</p>';
+}
+
+function apercu(){
+  var url=(document.getElementById('scanUrl').value||'').trim();
+  var box=document.getElementById('scanRes');
+  if(!url){box.hidden=false;box.innerHTML='<p>Indiquez l\'adresse de votre site.</p>';return;}
+  box.hidden=false;
+  box.innerHTML='<p>Analyse en cours…</p>';
+  // VERSION DÉMO : simulation d'aperçu (le vrai moteur de scan tourne en back-office).
+  // Score pseudo-déterministe à partir de l'URL pour un rendu stable en démo.
+  var seed=0; for(var i=0;i<url.length;i++){seed=(seed+url.charCodeAt(i))%97;}
+  var score=70+(seed%30); // 70–99 : la quasi-totalité des sites e-commerce sont non conformes
+  var bande = score>=85?'Critique':(score>=60?'Élevé':'Modéré');
+  setTimeout(function(){
+    box.innerHTML='<div class="verdict ko">Score de risque estimé : '+score+'/100 — '+bande+'</div>'+
+      '<div class="bar"><span style="width:'+score+'%"></span></div>'+
+      '<p style="margin:8px 0 4px">Familles de défauts les plus probables sur ce type de site :</p>'+
+      '<ul><li>Images sans alternative textuelle</li><li>Champs de formulaire sans étiquette</li>'+
+      '<li>Contrastes insuffisants</li><li>Aucune déclaration d\'accessibilité publiée</li></ul>'+
+      '<p style="font-size:.82rem;color:#666;margin:10px 0 0">Aperçu indicatif. '+
+      'Le <strong>diagnostic complet et détaillé est gratuit</strong> — <a href="contact.html">demandez-le ici</a>.</p>';
+  },650);
+}
+</script>
+</body>
+</html>

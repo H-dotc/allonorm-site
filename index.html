@@ -4,212 +4,59 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AlloNorm — Conformité à l'accessibilité numérique (European Accessibility Act / RGAA)</title>
-<meta name="description" content="AlloNorm accompagne les sites e-commerce dans leur mise en conformité à l'European Accessibility Act et au RGAA : audit, correction et déclaration d'accessibilité. Méthodologie RGAA officielle. Garantie de résultat.">
+<meta name="description" content="AlloNorm met les sites e-commerce en conformité avec l'European Accessibility Act et le RGAA : audit, correction et déclaration d'accessibilité. Garantie de résultat.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bleu:#000091;        /* bleu institutionnel */
-    --bleu-d:#00006b;
-    --rouge:#e1000f;
-    --ink:#161616;
-    --gris:#3a3a3a;
-    --gris-c:#666;
-    --bord:#dddddd;
-    --bg-alt:#f5f5fe;      /* fond bleuté très clair */
-    --bg-grey:#f6f6f6;
-    --vert:#18753c;
-    --vert-bg:#e7f4ec;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:"Public Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.65;background:#fff;font-size:17px}
-  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-  a{color:var(--bleu)}
-  h1,h2,h3{font-weight:700;line-height:1.2;letter-spacing:-.2px}
-  h1,h2.title{font-family:"Spectral",Georgia,serif}
-  section[id]{scroll-margin-top:80px}
-  .offer,.legal-card,.step{transition:transform .15s ease,box-shadow .15s ease}
-  .offer:hover,.legal-card:hover,.step:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,80,.10)}
-  nav.main a{position:relative}
-  nav.main a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--bleu);transition:right .2s ease}
-  nav.main a:hover::after{right:0}
-
-  /* Bandeau utilitaire haut */
-  .util{background:#fff;border-bottom:1px solid var(--bord);font-size:.82rem;color:var(--gris-c)}
-  .util .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;gap:16px;flex-wrap:wrap}
-  .util .left{display:flex;align-items:center;gap:10px}
-  .util .square{width:26px;height:26px;background:var(--bleu);border-radius:3px}
-
-  /* En-tête marque */
-  .masthead{border-bottom:3px solid var(--bleu)}
-  .masthead .wrap{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;gap:20px;flex-wrap:wrap}
-  .brand{display:flex;align-items:center;gap:14px}
-  .brand .mark{width:54px;height:54px;background:var(--bleu);color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem}
-  .brand .name{font-weight:800;font-size:1.4rem;letter-spacing:-.5px}
-  .brand .sub{font-size:.78rem;color:var(--gris-c);text-transform:uppercase;letter-spacing:.5px}
-  nav.main{display:flex;gap:22px;font-size:.92rem;font-weight:600}
-  nav.main a{text-decoration:none;color:var(--ink)}
-  nav.main a:hover{color:var(--bleu)}
-
-  /* Hero */
-  .hero{background:var(--bg-alt);border-bottom:1px solid var(--bord)}
-  .hero .wrap{padding:56px 24px}
-  .eyebrow{display:inline-block;background:#fff;border:1px solid var(--bleu);color:var(--bleu);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.6px;padding:5px 12px;border-radius:4px;margin-bottom:18px}
-  .hero h1{font-size:2.4rem;margin:0 0 16px;max-width:20ch}
-  .hero p.lead{font-size:1.2rem;color:var(--gris);max-width:62ch;margin:0 0 28px}
-  .actions{display:flex;gap:14px;flex-wrap:wrap}
-  .hero-trust{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:8px 26px;font-weight:600;font-size:.95rem;color:var(--bleu-d)}
-  .hero-trust li{white-space:nowrap}
-  .btn{display:inline-block;font-weight:700;padding:14px 26px;border-radius:5px;text-decoration:none;font-size:1rem}
-  .btn-p{background:var(--bleu);color:#fff}
-  .btn-p:hover{background:var(--bleu-d)}
-  .btn-s{background:#fff;color:var(--bleu);border:1px solid var(--bleu)}
-
-  /* Bandeau confiance */
-  .trust{background:var(--bleu);color:#fff}
-  .trust .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;padding:26px 24px}
-  .trust .item{display:flex;gap:12px;align-items:flex-start}
-  .trust .item b{display:block;font-size:1.05rem}
-  .trust .item span{font-size:.86rem;opacity:.85}
-
-  section{padding:56px 0}
-  section.alt{background:var(--bg-grey);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord)}
-  .kicker{color:var(--bleu);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.8rem;margin:0 0 8px}
-  h2.title{font-size:1.8rem;margin:0 0 8px}
-  .sub{color:var(--gris-c);max-width:65ch;margin:0 0 28px}
-
-  /* Cadre légal — encadré officiel */
-  .legal-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .legal-card{background:#fff;border:1px solid var(--bord);border-left:4px solid var(--bleu);border-radius:4px;padding:20px}
-  .legal-card h3{margin:0 0 6px;font-size:1.05rem}
-  .legal-card p{margin:0;color:var(--gris);font-size:.95rem}
-  .legal-card .ref{display:block;margin-top:8px;font-size:.8rem;color:var(--gris-c)}
-
-  /* Prestations */
-  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .offer{border:1px solid var(--bord);border-radius:6px;padding:24px;background:#fff;display:flex;flex-direction:column}
-  .offer.feature{border:2px solid var(--bleu);box-shadow:0 6px 24px rgba(0,0,145,.08)}
-  .offer .tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--rouge);margin-bottom:8px;min-height:14px}
-  .offer h3{margin:0 0 4px;font-size:1.2rem}
-  .offer .price{font-size:1.6rem;font-weight:800;color:var(--bleu);margin:6px 0 12px}
-  .offer ul{padding-left:18px;margin:0 0 18px;color:var(--gris);font-size:.92rem}
-  .offer ul li{margin:5px 0}
-  .offer .foot{margin-top:auto}
-
-  table.cmp{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:10px}
-  table.cmp th,table.cmp td{border:1px solid var(--bord);padding:10px 12px;text-align:left}
-  table.cmp th{background:var(--bg-alt)}
-  table.cmp td.us{font-weight:700;color:var(--bleu)}
-
-  .reframe{margin-top:30px;background:#fff;border:1px solid var(--bord);border-radius:8px;padding:24px;display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;text-align:center}
-  .reframe .big{font-family:"Spectral",Georgia,serif;font-size:2rem;font-weight:700;color:var(--bleu)}
-  .reframe .cap{font-size:.85rem;color:var(--gris-c);max-width:22ch;margin:0 auto}
-  .reframe .arrow{color:var(--gris-c);font-style:italic;font-size:.9rem}
-  .guarantee{background:var(--vert-bg);border:1px solid #b6ddc4;border-left:5px solid var(--vert);border-radius:5px;padding:26px}
-  .guarantee h2{margin:0 0 8px;color:var(--vert);font-size:1.35rem}
-  .guarantee p{margin:0;color:#1d4d31}
-
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
-  .step{background:#fff;border:1px solid var(--bord);border-radius:6px;padding:20px}
-  .step .n{width:34px;height:34px;border-radius:5px;background:var(--bleu);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
-  .step h3{margin:0 0 4px;font-size:1rem}
-  .step p{margin:0;font-size:.9rem;color:var(--gris)}
-
-  .who{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap}
-  .who-photo{flex:0 0 110px;height:110px;border-radius:8px;background:var(--bleu);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Spectral",serif;font-size:2.4rem;font-weight:700}
-  .platforms{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-  .platforms span{border:1px solid var(--bord);border-radius:5px;padding:6px 12px;font-size:.85rem;font-weight:600;color:var(--gris);background:#fff}
-  .tools{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .tool{background:#fff;border:1px solid var(--bord);border-radius:8px;padding:24px}
-  .tool h3{margin:0 0 14px;font-size:1.15rem}
-  .tool label{display:block;font-size:.85rem;font-weight:600;color:var(--gris);margin:0 0 12px}
-  .tool input{width:100%;margin-top:5px;padding:11px 12px;border:1px solid var(--bord);border-radius:5px;font-size:1rem}
-  .tool input:focus{outline:2px solid var(--bleu);border-color:var(--bleu)}
-  .tool .hint{font-size:.85rem;color:var(--gris-c);margin:0 0 14px}
-  .result{margin-top:16px;padding:16px;border-radius:6px;font-size:.95rem;border:1px solid var(--bord);background:var(--bg-alt)}
-  .result .verdict{font-weight:800;font-size:1.05rem;margin-bottom:6px}
-  .result .figure{font-family:"Spectral",serif;font-size:1.6rem;font-weight:700;color:var(--rouge);margin:6px 0}
-  .result .ok{color:var(--vert)} .result .ko{color:var(--rouge)}
-  .result .bar{height:8px;border-radius:4px;background:#e6e6f2;overflow:hidden;margin:8px 0}
-  .result .bar > span{display:block;height:100%;background:var(--rouge)}
-  .result ul{margin:8px 0 0;padding-left:18px;color:var(--gris)}
-  .disclaimer{margin-top:20px;background:#fff;border:1px solid var(--bord);border-left:4px solid #c9a227;border-radius:5px;padding:14px 18px;font-size:.85rem;color:var(--gris)}
-  .contact-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:6px auto 0;max-width:620px}
-  .contact-form input{flex:1 1 220px;padding:13px 14px;border:1px solid #fff;border-radius:5px;font-size:1rem}
-  .form-ok{background:rgba(255,255,255,.15);display:inline-block;padding:10px 16px;border-radius:6px;margin-top:14px}
-  .faq details{border:1px solid var(--bord);border-radius:5px;padding:14px 18px;margin-bottom:10px;background:#fff}
-  .faq summary{font-weight:700;cursor:pointer}
-  .faq p{color:var(--gris);margin:10px 0 0}
-
-  .cta-band{background:var(--bleu);color:#fff;text-align:center}
-  .cta-band .wrap{padding:48px 24px}
-  .cta-band h2{font-size:1.7rem;margin:0 0 10px}
-  .cta-band p{opacity:.9;margin:0 0 22px}
-  .cta-band .btn-p{background:#fff;color:var(--bleu)}
-
-  footer{background:#1b1b35;color:#cfcfe6;font-size:.86rem}
-  footer .wrap{padding:40px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
-  footer h4{color:#fff;font-size:.95rem;margin:0 0 10px}
-  footer a{color:#cfcfe6;text-decoration:none;display:block;margin:5px 0}
-  footer .legal{grid-column:1/-1;border-top:1px solid #33335c;padding-top:18px;color:#9a9ac4;font-size:.8rem}
-
-  @media(max-width:860px){
-    .legal-grid,.offers,.steps{grid-template-columns:1fr}
-    footer .wrap{grid-template-columns:1fr}
-    .hero h1{font-size:1.9rem}
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <!-- Bandeau utilitaire -->
 <div class="util"><div class="wrap">
-  <div class="left"><div class="square"></div><span>AlloNorm — Spécialiste de la conformité à l'accessibilité numérique</span></div>
+  <div class="left"><div class="square"></div><span>AlloNorm — Cabinet de conformité à l'accessibilité numérique</span></div>
   <div>contact@allonorm.com · 06 14 75 93 30</div>
 </div></div>
 
 <!-- En-tête -->
 <header class="masthead"><div class="wrap">
-  <div class="brand">
+  <a class="brand" href="index.html">
     <div class="mark">AN</div>
     <div>
       <div class="name">AlloNorm</div>
       <div class="sub">Conformité EAA · RGAA</div>
     </div>
-  </div>
+  </a>
   <nav class="main">
-    <a href="#cadre">Cadre légal</a>
-    <a href="#prestations">Prestations</a>
-    <a href="#methode">Méthodologie</a>
-    <a href="#cabinet">Le cabinet</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html" class="active">Accueil</a>
+    <a href="offres.html">Offres &amp; tarifs</a>
+    <a href="verifier.html">Vérifier mon site</a>
+    <a href="contact.html" class="cta">Diagnostic gratuit</a>
   </nav>
 </div></header>
 
 <!-- Hero -->
 <div class="hero"><div class="wrap">
-  <span class="eyebrow">European Accessibility Act · échéance de conformité 28 juin 2030</span>
-  <h1>La mise en conformité de votre site à la loi sur l'accessibilité numérique.</h1>
-  <p class="lead">AlloNorm accompagne les sites e-commerce dans leur conformité à l'European Accessibility Act et au Référentiel Général d'Amélioration de l'Accessibilité (RGAA) : audit, correction et déclaration d'accessibilité officielle. Toute refonte ou nouveau site est concerné dès maintenant — prenez de l'avance pendant que le chantier est simple.</p>
+  <span class="eyebrow">European Accessibility Act · les sites e-commerce sont concernés</span>
+  <h1>Votre site e-commerce est-il en règle avec la loi sur l'accessibilité&nbsp;?</h1>
+  <p class="lead">La loi impose l'accessibilité numérique aux boutiques en ligne, sous contrôle de la DGCCRF. Notre cabinet audite, corrige et délivre votre déclaration officielle — avec un engagement de résultat.</p>
   <div class="actions">
-    <a class="btn btn-p" href="#contact">Demander un diagnostic gratuit</a>
-    <a class="btn btn-s" href="#prestations">Consulter les prestations</a>
+    <a class="btn btn-p" href="verifier.html">Vérifier mon site en 30 secondes</a>
+    <a class="btn btn-s" href="offres.html">Consulter les offres</a>
   </div>
   <ul class="hero-trust">
     <li>✓ Méthodologie RGAA officielle (106 critères)</li>
-    <li>✓ Entreprise immatriculée — SIRET 106 456 601 00017</li>
     <li>✓ Garantie « conforme, ou nous continuons gratuitement »</li>
+    <li>✓ Diagnostic initial gratuit, sans engagement</li>
   </ul>
 </div></div>
 
 <!-- Bandeau confiance -->
 <div class="trust"><div class="wrap">
   <div class="item"><div><b>Méthodologie RGAA</b><span>Audit sur les 106 critères du référentiel officiel</span></div></div>
-  <div class="item"><div><b>Entreprise immatriculée</b><span>SIRET 106 456 601 00017 · facturation conforme</span></div></div>
   <div class="item"><div><b>Engagement de résultat</b><span>Conforme, ou nous poursuivons sans surcoût</span></div></div>
   <div class="item"><div><b>Cadre opposable</b><span>Déclaration d'accessibilité + attestation livrées</span></div></div>
+  <div class="item"><div><b>Interlocuteur unique</b><span>Un expert dédié, joignable, du devis à la livraison</span></div></div>
 </div></div>
 
 <!-- Cadre légal -->
@@ -239,120 +86,7 @@
       <span class="ref">Code de la consommation, art. L412-13 et L521-1</span>
     </div>
   </div>
-</div></section>
-
-<!-- Évaluer sa situation : simulateur + aperçu scanner -->
-<section id="evaluer" class="alt"><div class="wrap">
-  <p class="kicker">Évaluez votre situation en 30 secondes</p>
-  <h2 class="title">Êtes-vous concerné, et qu'est-ce que vous risquez&nbsp;?</h2>
-  <p class="sub">Deux outils indicatifs pour situer votre exposition. Ils ne remplacent pas un audit&nbsp;: ils vous donnent un premier aperçu.</p>
-
-  <div class="tools">
-    <!-- Simulateur -->
-    <div class="tool">
-      <h3>Simulateur d'assujettissement &amp; de risque</h3>
-      <label>Chiffre d'affaires en ligne (€/an)
-        <input type="number" id="ca" min="0" step="10000" placeholder="ex. 3 000 000">
-      </label>
-      <label>Nombre de salariés
-        <input type="number" id="sal" min="0" step="1" placeholder="ex. 25">
-      </label>
-      <button class="btn btn-p" type="button" onclick="simuler()">Évaluer mon risque</button>
-      <div id="simRes" class="result" hidden></div>
-    </div>
-
-    <!-- Aperçu scanner (bridé) -->
-    <div class="tool">
-      <h3>Aperçu d'accessibilité de votre site</h3>
-      <p class="hint">Un avant-goût de notre analyse&nbsp;: un score indicatif et les familles de défauts les plus fréquentes. Le diagnostic complet et détaillé est gratuit, sur demande.</p>
-      <label>Adresse de votre site
-        <input type="url" id="scanUrl" placeholder="https://votre-boutique.fr">
-      </label>
-      <button class="btn btn-s" type="button" onclick="apercu()">Lancer l'aperçu</button>
-      <div id="scanRes" class="result" hidden></div>
-    </div>
-  </div>
-
-  <p class="disclaimer">⚠️ <strong>Ces outils ne sont qu'une simulation indicative.</strong> Ils peuvent comporter des erreurs et se fondent uniquement sur les éléments que vous saisissez&nbsp;; les montants affichés sont des ordres de grandeur réglementaires (plafonds), non un calcul de votre amende réelle. Ils ne constituent ni un audit, ni un avis juridique. Seul un audit RGAA établit votre conformité réelle.</p>
-</div></section>
-
-<!-- Prestations -->
-<section id="prestations" class="alt"><div class="wrap">
-  <p class="kicker">Nos prestations</p>
-  <h2 class="title">Une mise en conformité clé en main</h2>
-  <p class="sub">Des prestations forfaitaires, sans abonnement, aux tarifs les plus accessibles du marché — rendues possibles par une méthodologie outillée. Prix exprimés hors taxes.</p>
-  <div class="offers">
-    <div class="offer">
-      <div class="tag"></div>
-      <h3>Audit RGAA</h3>
-      <div class="price">dès 1 290 €</div>
-      <ul>
-        <li>Évaluation des 106 critères RGAA</li>
-        <li>Test au lecteur d'écran et au clavier</li>
-        <li>Rapport priorisé signé</li>
-        <li>Plan de correction actionnable</li>
-      </ul>
-      <div class="foot"><a class="btn btn-s" href="#contact">Demander un devis</a></div>
-    </div>
-    <div class="offer feature">
-      <div class="tag">Prestation recommandée</div>
-      <h3>Pack Conformité EAA</h3>
-      <div class="price">dès 3 900 €</div>
-      <ul>
-        <li>Audit complet</li>
-        <li>Correction réelle du site</li>
-        <li>Déclaration d'accessibilité</li>
-        <li>Contre-audit de validation</li>
-        <li>Engagement de résultat inclus</li>
-      </ul>
-      <div class="foot"><a class="btn btn-p" href="#contact">Demander un devis</a></div>
-    </div>
-    <div class="offer">
-      <div class="tag"></div>
-      <h3>Mise en conformité</h3>
-      <div class="price">dès 1 900 €</div>
-      <ul>
-        <li>Correction du thème (Shopify, PrestaShop, WooCommerce, Magento)</li>
-        <li>Alternatives, étiquettes, contrastes, ARIA, navigation clavier</li>
-        <li>Prix affichés par palier de volume</li>
-      </ul>
-      <div class="foot"><a class="btn btn-s" href="#contact">Demander un devis</a></div>
-    </div>
-  </div>
-
-  <h3 style="margin:34px 0 6px">Notre positionnement tarifaire</h3>
-  <table class="cmp">
-    <tr><th>Prestataire</th><th>Audit</th><th>Correction</th></tr>
-    <tr><td>Agences spécialisées</td><td>3 000 – 12 000 €</td><td>5 000 – 30 000 €</td></tr>
-    <tr><td>Consultants indépendants</td><td>1 500 – 5 000 €</td><td>sur devis</td></tr>
-    <tr><td class="us">AlloNorm</td><td class="us">dès 1 290 €</td><td class="us">dès 1 900 € (prix affichés)</td></tr>
-  </table>
-  <p class="sub" style="margin-top:14px">Paiement en 3× ou 4× sans frais possible. Devis et factures électroniques émis conformément aux normes françaises et européennes.</p>
-
-  <div class="reframe">
-    <div>
-      <div class="big">4 900 €</div>
-      <div class="cap">Pack Conformité, pour une boutique à ~3 M€ de CA</div>
-    </div>
-    <div class="arrow">soit</div>
-    <div>
-      <div class="big">0,16 %</div>
-      <div class="cap">de votre chiffre d'affaires annuel — garanti conforme</div>
-    </div>
-    <div class="arrow">face à</div>
-    <div>
-      <div class="big" style="color:var(--rouge)">300 000 €</div>
-      <div class="cap">d'astreinte encourue (plafond), contrôle DGCCRF</div>
-    </div>
-  </div>
-</div></section>
-
-<!-- Garantie -->
-<section id="garantie"><div class="wrap">
-  <div class="guarantee">
-    <h2>Engagement de résultat</h2>
-    <p><strong>Conforme, ou nous poursuivons gratuitement.</strong> Pour le Pack Conformité et les prestations de correction, nous nous engageons sur le niveau de conformité RGAA visé au devis. Si le contre-audit ne l'atteint pas, nous poursuivons les corrections sans surcoût jusqu'à l'atteindre.</p>
-  </div>
+  <p style="margin-top:26px"><a class="btn btn-p" href="verifier.html">Vérifier si je suis concerné →</a></p>
 </div></section>
 
 <!-- Méthodologie -->
@@ -367,15 +101,23 @@
   </div>
 </div></section>
 
-<!-- Incarnation -->
-<section id="cabinet"><div class="wrap">
+<!-- Garantie -->
+<section id="garantie"><div class="wrap">
+  <div class="guarantee">
+    <h2>Engagement de résultat</h2>
+    <p><strong>Conforme, ou nous poursuivons gratuitement.</strong> Pour le Pack Conformité et les prestations de correction, nous nous engageons sur le niveau de conformité RGAA visé au devis. Si le contre-audit ne l'atteint pas, nous poursuivons les corrections sans surcoût jusqu'à l'atteindre.</p>
+  </div>
+</div></section>
+
+<!-- Le cabinet -->
+<section id="cabinet" class="alt"><div class="wrap">
   <p class="kicker">Le cabinet</p>
   <h2 class="title">Qui réalise votre mise en conformité</h2>
   <div class="who">
     <div class="who-photo" aria-hidden="true">AN</div>
     <div>
       <h3 style="margin:0 0 4px">Le cabinet AlloNorm</h3>
-      <p style="margin:0 0 10px;color:var(--gris-c)">Entreprise immatriculée · SIRET 106 456 601 00017 · Normandie</p>
+      <p style="margin:0 0 10px;color:var(--gris-c)">Cabinet spécialisé en accessibilité numérique · Normandie</p>
       <p style="margin:0;color:var(--gris)">Chaque audit et chaque correction sont réalisés en direct, sans sous-traitance opaque : un interlocuteur unique, joignable, qui engage sa responsabilité sur le résultat. Nous travaillons selon la méthodologie RGAA officielle, sur un environnement de test, et ne publions qu'après votre validation.</p>
       <p style="margin:12px 0 0"><strong>Nous intervenons sur :</strong></p>
       <div class="platforms"><span>Shopify</span><span>PrestaShop</span><span>WooCommerce</span><span>Magento</span><span>sites sur-mesure</span></div>
@@ -383,49 +125,30 @@
   </div>
 </div></section>
 
-<!-- FAQ -->
-<section id="faq" class="alt"><div class="wrap">
-  <p class="kicker">Questions fréquentes</p>
-  <h2 class="title">Ce que les responsables e-commerce nous demandent</h2>
-  <div class="faq">
-    <details><summary>Mon site est-il vraiment concerné par cette obligation ?</summary><p>Si votre activité de vente en ligne dépasse 10 salariés ou 2 M€ de chiffre d'affaires, oui. Le diagnostic gratuit vous le confirme et identifie vos non-conformités.</p></details>
-    <details><summary>Un outil automatique ne suffit-il pas ?</summary><p>Non. Les scanners automatiques ne couvrent qu'environ 30 % des critères et ne rendent pas un site conforme. La conformité exige un audit humain et une correction réelle du code — ce que nous réalisons.</p></details>
-    <details><summary>Combien de temps prend une mise en conformité ?</summary><p>Selon le volume de non-conformités, généralement de quelques jours à quelques semaines. Le délai précis figure au devis.</p></details>
-    <details><summary>Travaillez-vous directement sur mon site en production ?</summary><p>Non. Nous intervenons sur un thème dupliqué ou un environnement de test, et la publication n'a lieu qu'après votre validation.</p></details>
-  </div>
-</div></section>
-
 <!-- CTA -->
-<div class="cta-band" id="contact"><div class="wrap">
+<div class="cta-band"><div class="wrap">
   <h2>Recevez votre diagnostic d'accessibilité gratuit</h2>
   <p>Communiquez-nous l'adresse de votre boutique : nous vous transmettons un rapport détaillé de vos non-conformités, sans engagement.</p>
-  <form class="contact-form" onsubmit="return fauxEnvoi(event)">
-    <input type="url" name="site" placeholder="https://votre-boutique.fr" required>
-    <input type="email" name="email" placeholder="Votre email professionnel" required>
-    <button class="btn btn-p" type="submit">Recevoir mon diagnostic gratuit</button>
-  </form>
-  <p class="form-ok" id="formOk" hidden>✓ Merci. Nous revenons vers vous sous 24&nbsp;h ouvrées avec votre rapport.</p>
-  <p style="margin-top:16px;font-size:.95rem;opacity:.9">ou directement : <a href="mailto:contact@allonorm.com" style="color:inherit"><strong>contact@allonorm.com</strong></a> · <strong>06 14 75 93 30</strong></p>
-  <p style="margin-top:6px;font-size:.78rem;opacity:.65">[Démo — formulaire à brancher sur Formspree/Web3Forms (gratuit) → livraison vers contact@allonorm.com.]</p>
+  <a class="btn btn-p" href="contact.html">Demander mon diagnostic gratuit</a>
 </div></div>
 
 <!-- Footer -->
 <footer><div class="wrap">
   <div>
     <h4>AlloNorm</h4>
-    <p style="margin:0;max-width:40ch">Spécialiste de la mise en conformité des sites e-commerce à l'accessibilité numérique (European Accessibility Act / RGAA).</p>
+    <p style="margin:0;max-width:40ch">Cabinet spécialisé dans la mise en conformité des sites e-commerce à l'accessibilité numérique (European Accessibility Act / RGAA).</p>
   </div>
   <div>
     <h4>Prestations</h4>
-    <a href="#prestations">Audit RGAA</a>
-    <a href="#prestations">Mise en conformité</a>
-    <a href="#prestations">Pack Conformité EAA</a>
-    <a href="#prestations">Déclaration d'accessibilité</a>
+    <a href="offres.html">Audit RGAA</a>
+    <a href="offres.html">Mise en conformité</a>
+    <a href="offres.html">Pack Conformité EAA</a>
+    <a href="verifier.html">Vérifier mon site</a>
   </div>
   <div>
     <h4>Informations</h4>
-    <a href="#cadre">Cadre légal</a>
-    <a href="#methode">Méthodologie</a>
+    <a href="index.html#cadre">Cadre légal</a>
+    <a href="contact.html">Contact</a>
     <a href="mentions-legales.html">Mentions légales</a>
     <a href="cgv.html">Conditions générales de vente</a>
   </div>
@@ -436,60 +159,5 @@
   </div>
 </div></footer>
 
-<script>
-function euros(n){return n.toLocaleString('fr-FR')+' €';}
-
-function simuler(){
-  var ca=parseFloat(document.getElementById('ca').value)||0;
-  var sal=parseInt(document.getElementById('sal').value)||0;
-  var box=document.getElementById('simRes');
-  box.hidden=false;
-  var assujetti=(sal>=10 || ca>2000000);
-  if(!assujetti){
-    box.innerHTML='<div class="verdict ok">Vous semblez exempté</div>'+
-      '<p>Avec moins de 10 salariés <em>et</em> 2 M€ de CA en ligne, la micro-entreprise n\'est pas assujettie. '+
-      'Attention : tout dépassement de l\'un des deux seuils vous y soumet immédiatement.</p>';
-    return;
-  }
-  // Estimation indicative (ordres de grandeur réglementaires, pas un calcul d'amende réelle)
-  box.innerHTML='<div class="verdict ko">Vous êtes assujetti à l\'EAA</div>'+
-    '<p>Au moins un seuil est dépassé (≥ 10 salariés ou &gt; 2 M€ de CA en ligne).</p>'+
-    '<div class="figure">jusqu\'à '+euros(300000)+'</div>'+
-    '<p style="margin:0 0 6px">d\'astreinte encourue (plafond réglementaire), en sus de <strong>7 500 € par manquement</strong> '+
-    '(15 000 € en récidive), sous contrôle de la DGCCRF.</p>'+
-    '<div class="bar"><span style="width:100%"></span></div>'+
-    '<p style="font-size:.82rem;color:#666;margin:8px 0 0">Échéance de conformité : 28 juin 2030 — immédiate pour tout nouveau site ou refonte. '+
-    'Chiffre indicatif, plafond théorique, non représentatif de votre amende réelle.</p>';
-}
-
-function apercu(){
-  var url=(document.getElementById('scanUrl').value||'').trim();
-  var box=document.getElementById('scanRes');
-  if(!url){box.hidden=false;box.innerHTML='<p>Indiquez l\'adresse de votre site.</p>';return;}
-  box.hidden=false;
-  box.innerHTML='<p>Analyse en cours…</p>';
-  // VERSION DÉMO : simulation d'aperçu (le vrai moteur de scan tourne en back-office).
-  // Score pseudo-déterministe à partir de l'URL pour un rendu stable en démo.
-  var seed=0; for(var i=0;i<url.length;i++){seed=(seed+url.charCodeAt(i))%97;}
-  var score=70+(seed%30); // 70–99 : la quasi-totalité des sites e-commerce sont non conformes
-  var bande = score>=85?'Critique':(score>=60?'Élevé':'Modéré');
-  setTimeout(function(){
-    box.innerHTML='<div class="verdict ko">Score de risque estimé : '+score+'/100 — '+bande+'</div>'+
-      '<div class="bar"><span style="width:'+score+'%"></span></div>'+
-      '<p style="margin:8px 0 4px">Familles de défauts les plus probables sur ce type de site :</p>'+
-      '<ul><li>Images sans alternative textuelle</li><li>Champs de formulaire sans étiquette</li>'+
-      '<li>Contrastes insuffisants</li><li>Aucune déclaration d\'accessibilité publiée</li></ul>'+
-      '<p style="font-size:.82rem;color:#666;margin:10px 0 0">Aperçu indicatif. '+
-      'Le <strong>diagnostic complet et détaillé est gratuit</strong> — demandez-le via le formulaire de contact.</p>';
-  },650);
-}
-
-function fauxEnvoi(e){
-  e.preventDefault();
-  document.querySelector('.contact-form').hidden=true;
-  document.getElementById('formOk').hidden=false;
-  return false;
-}
-</script>
 </body>
 </html>
