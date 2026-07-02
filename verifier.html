@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vérifier mon site — AlloNorm</title>
+<title>Vérifier mon site · AlloNorm</title>
 <meta name="description" content="Êtes-vous assujetti à l'European Accessibility Act ? Que risquez-vous ? Vérifiez votre situation en 30 secondes et obtenez un aperçu d'accessibilité de votre site.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <body>
 
 <div class="util"><div class="wrap">
-  <div class="left"><div class="square"></div><span>AlloNorm — Cabinet de conformité à l'accessibilité numérique</span></div>
+  <div class="left"><div class="square"></div><span>AlloNorm · Cabinet de conformité à l'accessibilité numérique</span></div>
   <div>contact@allonorm.com · 06 14 75 93 30</div>
 </div></div>
 
@@ -99,7 +99,7 @@
     <a href="cgv.html">Conditions générales de vente</a>
   </div>
   <div class="legal">
-    AlloNorm — entreprise immatriculée — SIRET 106 456 601 00017 — TVA non applicable (art. 293 B du CGI).
+    AlloNorm, entreprise immatriculée. SIRET 106 456 601 00017. TVA non applicable (art. 293 B du CGI).
     Prestations destinées aux professionnels. Méthodologie conforme au Référentiel Général d'Amélioration de l'Accessibilité (RGAA).
     AlloNorm est un prestataire privé indépendant et n'est pas un service de l'État.
   </div>
@@ -127,7 +127,7 @@ function simuler(){
     '<p style="margin:0 0 6px">d\'astreinte encourue (plafond réglementaire), en sus de <strong>7 500 € par manquement</strong> '+
     '(15 000 € en récidive), sous contrôle de la DGCCRF.</p>'+
     '<div class="bar"><span style="width:100%"></span></div>'+
-    '<p style="font-size:.82rem;color:#666;margin:8px 0 0">Échéance de conformité : 28 juin 2030 — immédiate pour tout nouveau site ou refonte. '+
+    '<p style="font-size:.82rem;color:#666;margin:8px 0 0">Échéance de conformité : 28 juin 2030, immédiate pour tout nouveau site ou refonte. '+
     'Chiffre indicatif, plafond théorique, non représentatif de votre amende réelle.</p>';
 }
 
@@ -243,7 +243,7 @@ function apercu(){
     if(i>=tentatives.length){
       box.innerHTML='<div class="verdict">Analyse en ligne indisponible pour ce site</div>'+
         '<p>Certains sites bloquent l\'analyse depuis un navigateur. Aucun score inventé ne vous sera affiché&nbsp;: '+
-        'demandez le <strong><a href="contact.html">diagnostic complet gratuit</a></strong> — nous l\'exécutons avec notre outil professionnel et vous envoyons le rapport réel.</p>';
+        'demandez le <strong><a href="contact.html">diagnostic complet gratuit</a></strong> : nous l\'exécutons avec notre outil professionnel et vous envoyons le rapport réel.</p>';
       return;
     }
     fetchAvecTimeout(tentatives[i],15000).then(function(html){
@@ -257,7 +257,7 @@ function apercu(){
     var cles=Object.keys(res);
     if(!cles.length){
       box.innerHTML='<div class="verdict ok">Aucun défaut détecté par l\'aperçu</div>'+
-        '<p>Bon signe — mais cet aperçu ne couvre qu\'une partie des 106 critères RGAA (environ 30 % sont automatisables). '+
+        '<p>Bon signe, mais cet aperçu ne couvre qu\'une partie des 106 critères RGAA (environ 30 % sont automatisables). '+
         'Seul un audit complet établit la conformité. Le <a href="contact.html">diagnostic approfondi est gratuit</a>.</p>';
       return;
     }
@@ -271,16 +271,16 @@ function apercu(){
     var lignes=top.map(function(cid){
       var c=CRITERES[cid];
       var occ=res[cid]>1?('<strong>'+res[cid]+'</strong> occurrences'):'constaté';
-      return '<li>'+c.titre+' — '+occ+' <span style="color:#666;font-size:.82rem">('+c.rgaa+', '+c.grav+')</span></li>';
+      return '<li>'+c.titre+' : '+occ+' <span style="color:#666;font-size:.82rem">('+c.rgaa+', '+c.grav+')</span></li>';
     }).join('');
     var reste=cles.length-top.length;
-    box.innerHTML='<div class="verdict ko">Score de risque : '+sc.score+'/100 — '+sc.bande+'</div>'+
+    box.innerHTML='<div class="verdict ko">Score de risque : '+sc.score+'/100 · '+sc.bande+'</div>'+
       '<div class="bar"><span style="width:'+sc.score+'%"></span></div>'+
       '<p style="margin:8px 0 4px">Défauts <strong>réellement détectés</strong> sur votre page d\'accueil&nbsp;:</p>'+
       '<ul>'+lignes+'</ul>'+
       (reste>0?'<p style="margin:8px 0 0">… et <strong>'+reste+' autre'+(reste>1?'s':'')+' famille'+(reste>1?'s':'')+' de défauts</strong> détectée'+(reste>1?'s':'')+', détaillée'+(reste>1?'s':'')+' dans le diagnostic complet.</p>':'')+
       '<p style="font-size:.82rem;color:#666;margin:10px 0 0">Analyse automatique de la page d\'accueil uniquement (~30 % des critères RGAA sont automatisables). '+
-      'Le <strong>diagnostic complet et détaillé est gratuit</strong> — <a href="contact.html">demandez-le ici</a>.</p>';
+      'Le <strong>diagnostic complet et détaillé est gratuit</strong> : <a href="contact.html">demandez-le ici</a>.</p>';
   }
 }
 </script>

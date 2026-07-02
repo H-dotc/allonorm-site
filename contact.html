@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact — Diagnostic gratuit — AlloNorm</title>
+<title>Contact · Diagnostic gratuit · AlloNorm</title>
 <meta name="description" content="Demandez votre diagnostic d'accessibilité gratuit : un rapport détaillé des non-conformités de votre site, sous 24 h ouvrées, sans engagement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <body>
 
 <div class="util"><div class="wrap">
-  <div class="left"><div class="square"></div><span>AlloNorm — Cabinet de conformité à l'accessibilité numérique</span></div>
+  <div class="left"><div class="square"></div><span>AlloNorm · Cabinet de conformité à l'accessibilité numérique</span></div>
   <div>contact@allonorm.com · 06 14 75 93 30</div>
 </div></div>
 
@@ -83,7 +83,7 @@
     <a href="cgv.html">Conditions générales de vente</a>
   </div>
   <div class="legal">
-    AlloNorm — entreprise immatriculée — SIRET 106 456 601 00017 — TVA non applicable (art. 293 B du CGI).
+    AlloNorm, entreprise immatriculée. SIRET 106 456 601 00017. TVA non applicable (art. 293 B du CGI).
     Prestations destinées aux professionnels. Méthodologie conforme au Référentiel Général d'Amélioration de l'Accessibilité (RGAA).
     AlloNorm est un prestataire privé indépendant et n'est pas un service de l'État.
   </div>
@@ -95,7 +95,7 @@ async function envoyerDemande(e){
   const form = e.target, btn = document.getElementById('formBtn');
   btn.disabled = true; btn.textContent = 'Envoi en cours…';
   const donnees = Object.fromEntries(new FormData(form));
-  donnees._subject = 'Demande de diagnostic — ' + (donnees.site || 'site non précisé');
+  donnees._subject = 'Demande de diagnostic : ' + (donnees.site || 'site non précisé');
   donnees._template = 'table';
   try {
     const r = await fetch('https://formsubmit.co/ajax/contact@allonorm.com', {
