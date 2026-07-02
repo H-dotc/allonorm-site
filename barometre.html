@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baromètre 2026 de l'accessibilité e-commerce : 74 % des grandes boutiques sans déclaration : AlloNorm</title>
+<meta name="description" content="Le cabinet AlloNorm a analysé 113 grandes boutiques en ligne (France, Belgique, Luxembourg) : 74 % ne publient aucune déclaration d'accessibilité, 95 % présentent au moins une non-conformité critique. Chiffres, défauts les plus répandus et méthodologie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Styles propres au baromètre */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:6px 0 8px}
+.kpi{background:#fff;border:1px solid var(--bord);border-top:4px solid var(--bleu);border-radius:4px;padding:18px 20px}
+.kpi .label{font-size:.86rem;color:var(--gris-c);margin:0 0 6px}
+.kpi .value{font-family:'Public Sans',sans-serif;font-weight:600;font-size:2.3rem;line-height:1.1;color:var(--ink)}
+.kpi .value small{font-size:1.2rem;font-weight:600}
+.kpi .foot{font-size:.8rem;color:var(--gris-c);margin:6px 0 0}
+.chart{margin:10px 0 4px}
+.chart .row{display:grid;grid-template-columns:minmax(180px,300px) 1fr;gap:12px;align-items:center;padding:7px 0}
+.chart .row + .row{border-top:1px solid #f0f0f0}
+.chart .lib{font-size:.92rem;color:var(--ink)}
+.chart .track{position:relative;height:22px}
+.chart .track::before{content:"";position:absolute;left:0;top:-4px;bottom:-4px;width:1px;background:var(--bord)}
+.chart .bar{position:absolute;left:0;top:0;height:22px;background:#4d4dff;border-radius:0 4px 4px 0;transition:background .12s ease}
+.chart .row:hover .bar{background:var(--bleu)}
+.chart .val{position:absolute;top:0;line-height:22px;font-size:.88rem;font-weight:700;color:var(--ink);padding-left:8px;font-variant-numeric:tabular-nums}
+.chart-note{font-size:.82rem;color:var(--gris-c);margin:14px 0 0}
+.table-view{margin:18px 0 0}
+.table-view summary{cursor:pointer;font-size:.9rem;color:var(--bleu);font-weight:600}
+.table-view table{border-collapse:collapse;margin:12px 0 0;font-size:.92rem}
+.table-view th,.table-view td{border:1px solid var(--bord);padding:8px 12px;text-align:left}
+.table-view td:last-child,.table-view th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.methodo{background:var(--bg-grey);border:1px solid var(--bord);border-radius:4px;padding:20px 22px;font-size:.93rem;color:var(--gris)}
+.methodo h3{margin:0 0 10px;font-size:1rem;color:var(--ink)}
+.methodo ul{margin:0;padding-left:20px}
+.methodo li{margin:5px 0}
+@media (max-width:640px){.chart .row{grid-template-columns:1fr;gap:4px}.chart .lib{font-size:.86rem}}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="wrap">
+  <div class="left"><div class="square"></div><span>AlloNorm — Cabinet de conformité à l'accessibilité numérique</span></div>
+  <div>contact@allonorm.com · 06 14 75 93 30</div>
+</div></div>
+
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="index.html">
+    <div class="mark">AN</div>
+    <div>
+      <div class="name">AlloNorm</div>
+      <div class="sub">Conformité EAA · RGAA</div>
+    </div>
+  </a>
+  <nav class="main">
+    <a href="index.html">Accueil</a>
+    <a href="offres.html">Offres &amp; tarifs</a>
+    <a href="verifier.html">Vérifier mon site</a>
+    <a href="barometre.html" class="active">Baromètre 2026</a>
+    <a href="contact.html" class="cta">Diagnostic gratuit</a>
+  </nav>
+</div></header>
+
+<div class="hero page"><div class="wrap">
+  <span class="eyebrow">Baromètre : juillet 2026</span>
+  <h1>L'accessibilité des grandes boutiques en ligne, mesurée</h1>
+  <p class="lead">Le cabinet a analysé la page d'accueil de 113 boutiques en ligne parmi les plus connues de France, de Belgique et du Luxembourg : mode, beauté, maison, alimentaire, enfance. Un an après l'entrée en application de l'European Accessibility Act, voici ce que montrent les contrôles automatiques.</p>
+</div></div>
+
+<section><div class="wrap">
+  <p class="kicker">Les chiffres clés</p>
+  <h2 class="title">Un marché très loin de la conformité</h2>
+  <div class="kpis">
+    <div class="kpi">
+      <p class="label">Aucune déclaration d'accessibilité publiée</p>
+      <div class="value">74<small>&nbsp;%</small></div>
+      <p class="foot">84 boutiques sur 113. Ce document est pourtant obligatoire.</p>
+    </div>
+    <div class="kpi">
+      <p class="label">Au moins une non-conformité critique</p>
+      <div class="value">95<small>&nbsp;%</small></div>
+      <p class="foot">107 boutiques sur 113, dès la page d'accueil.</p>
+    </div>
+    <div class="kpi">
+      <p class="label">Non-conformités par page d'accueil</p>
+      <div class="value">90</div>
+      <p class="foot">Valeur médiane. Moyenne : 140. Maximum relevé : 1&nbsp;160.</p>
+    </div>
+    <div class="kpi">
+      <p class="label">Boutiques analysées</p>
+      <div class="value">113</div>
+      <p class="foot">France, Belgique et Luxembourg, juillet 2026.</p>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:14px">Ces chiffres sont des planchers : les contrôles automatiques ne couvrent qu'une partie des critères du RGAA. Un audit manuel révèle en pratique des non-conformités supplémentaires.</p>
+</div></section>
+
+<section style="background:var(--bg-alt)"><div class="wrap">
+  <p class="kicker">Le détail</p>
+  <h2 class="title">Les défauts les plus répandus</h2>
+  <p class="sub">Part des 113 boutiques présentant chaque famille de défauts sur leur page d'accueil.</p>
+
+  <div class="chart">
+    <div class="row"><span class="lib">Liens ouvrant une nouvelle fenêtre sans prévenir</span><span class="track"><span class="bar" style="width:88%"></span><span class="val" style="left:88%">88&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Liens sans intitulé accessible</span><span class="track"><span class="bar" style="width:77%"></span><span class="val" style="left:77%">77&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Déclaration d'accessibilité introuvable</span><span class="track"><span class="bar" style="width:74%"></span><span class="val" style="left:74%">74&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Champs de formulaire sans étiquette</span><span class="track"><span class="bar" style="width:71%"></span><span class="val" style="left:71%">71&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Images sans alternative textuelle</span><span class="track"><span class="bar" style="width:57%"></span><span class="val" style="left:57%">57&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Boutons sans intitulé accessible</span><span class="track"><span class="bar" style="width:54%"></span><span class="val" style="left:54%">54&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Aucun titre principal (H1) sur la page</span><span class="track"><span class="bar" style="width:42%"></span><span class="val" style="left:42%">42&nbsp;%</span></span></div>
+    <div class="row"><span class="lib">Cadres (iframe) sans titre</span><span class="track"><span class="bar" style="width:42%"></span><span class="val" style="left:42%">42&nbsp;%</span></span></div>
+  </div>
+  <p class="chart-note">Chaque défaut de cette liste bloque concrètement des personnes : un lien sans intitulé est muet pour un lecteur d'écran, un champ sans étiquette rend un formulaire inutilisable.</p>
+
+  <details class="table-view">
+    <summary>Voir les données en tableau</summary>
+    <table>
+      <caption style="text-align:left;font-size:.85rem;color:var(--gris-c);padding:6px 0">Familles de défauts détectées, part des 113 boutiques concernées (juillet 2026)</caption>
+      <thead><tr><th scope="col">Famille de défauts</th><th scope="col">Boutiques concernées</th><th scope="col">Part</th></tr></thead>
+      <tbody>
+        <tr><td>Liens ouvrant une nouvelle fenêtre sans prévenir</td><td>99</td><td>88&nbsp;%</td></tr>
+        <tr><td>Liens sans intitulé accessible</td><td>87</td><td>77&nbsp;%</td></tr>
+        <tr><td>Déclaration d'accessibilité introuvable</td><td>84</td><td>74&nbsp;%</td></tr>
+        <tr><td>Champs de formulaire sans étiquette</td><td>80</td><td>71&nbsp;%</td></tr>
+        <tr><td>Images sans alternative textuelle</td><td>64</td><td>57&nbsp;%</td></tr>
+        <tr><td>Boutons sans intitulé accessible</td><td>61</td><td>54&nbsp;%</td></tr>
+        <tr><td>Identifiants HTML en double</td><td>54</td><td>48&nbsp;%</td></tr>
+        <tr><td>Aucun titre principal (H1)</td><td>48</td><td>42&nbsp;%</td></tr>
+        <tr><td>Cadres (iframe) sans titre</td><td>47</td><td>42&nbsp;%</td></tr>
+        <tr><td>Références ARIA pointant dans le vide</td><td>37</td><td>33&nbsp;%</td></tr>
+        <tr><td>Zoom désactivé sur mobile</td><td>34</td><td>30&nbsp;%</td></tr>
+        <tr><td>Pas de lien d'évitement</td><td>32</td><td>28&nbsp;%</td></tr>
+      </tbody>
+    </table>
+  </details>
+</div></section>
+
+<section><div class="wrap">
+  <p class="kicker">Ce que dit la loi</p>
+  <h2 class="title">Pourquoi ces chiffres engagent les boutiques</h2>
+  <div class="legal-grid">
+    <div class="legal-card">
+      <h3>L'obligation s'applique déjà</h3>
+      <p>L'European Accessibility Act s'applique aux sites e-commerce depuis le 28 juin 2025. Les sites existants ont jusqu'au 28 juin 2030 pour se mettre en conformité, mais toute refonte fait basculer le site dans l'obligation immédiate.</p>
+      <span class="ref">Directive (UE) 2019/882, transposée en droit français</span>
+    </div>
+    <div class="legal-card">
+      <h3>La déclaration d'accessibilité est obligatoire</h3>
+      <p>Publier une déclaration d'accessibilité est une obligation à part entière. Les trois quarts des boutiques analysées sont donc en manquement sur ce seul point, indépendamment de l'état technique de leur site.</p>
+      <span class="ref">Sanction : jusqu'à 7&nbsp;500&nbsp;€ par manquement, contrôle DGCCRF</span>
+    </div>
+  </div>
+</div></section>
+
+<section style="background:var(--bg-grey)"><div class="wrap">
+  <div class="methodo">
+    <h3>Méthodologie et limites</h3>
+    <ul>
+      <li>113 boutiques en ligne analysées en juillet 2026, sélectionnées parmi les marques e-commerce les plus connues de France (89), de Belgique et du Luxembourg (24).</li>
+      <li>Analyse automatisée de la page d'accueil de chaque site : contrôles statiques du cabinet et moteur axe-core, alignés sur les familles de critères du RGAA.</li>
+      <li>Les contrôles automatiques ne couvrent qu'une partie des critères du RGAA : les taux publiés ici sont des minima, pas des maxima.</li>
+      <li>La présence de la déclaration d'accessibilité est recherchée depuis la page d'accueil ; une déclaration existante mais introuvable depuis l'accueil est comptée manquante, ce qui constitue en soi un défaut.</li>
+      <li>Le baromètre est publié de manière agrégée et anonyme : aucun classement nominatif. Chaque marque peut demander gratuitement son propre rapport détaillé.</li>
+    </ul>
+  </div>
+</div></section>
+
+<div class="cta-band"><div class="wrap">
+  <h2>Où en est votre boutique ?</h2>
+  <p>Vérifiez votre site en 30 secondes avec notre outil, ou demandez le diagnostic gratuit complet : un rapport détaillé de vos non-conformités, sous 24&nbsp;h ouvrées, sans engagement.</p>
+  <div class="actions">
+    <a class="btn btn-p" href="verifier.html">Vérifier mon site</a>
+    <a class="btn btn-s" href="contact.html">Recevoir le diagnostic gratuit</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <div>
+    <h4>AlloNorm</h4>
+    <p style="margin:0;max-width:40ch">Cabinet spécialisé dans la mise en conformité des sites e-commerce à l'accessibilité numérique (European Accessibility Act / RGAA).</p>
+  </div>
+  <div>
+    <h4>Prestations</h4>
+    <a href="offres.html">Audit RGAA</a>
+    <a href="offres.html">Mise en conformité</a>
+    <a href="offres.html">Pack Conformité EAA</a>
+    <a href="verifier.html">Vérifier mon site</a>
+  </div>
+  <div>
+    <h4>Informations</h4>
+    <a href="index.html#cadre">Cadre légal</a>
+    <a href="barometre.html">Baromètre 2026</a>
+    <a href="contact.html">Contact</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="cgv.html">Conditions générales de vente</a>
+  </div>
+  <div class="legal">
+    AlloNorm — entreprise immatriculée — SIRET 106 456 601 00017 — TVA non applicable (art. 293 B du CGI).
+    Prestations destinées aux professionnels. Méthodologie conforme au Référentiel Général d'Amélioration de l'Accessibilité (RGAA).
+    AlloNorm est un prestataire privé indépendant et n'est pas un service de l'État.
+  </div>
+</div></footer>
+
+</body>
+</html>
