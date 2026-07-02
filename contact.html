@@ -37,14 +37,15 @@
 <div class="cta-band"><div class="wrap">
   <h2>Recevez votre diagnostic d'accessibilité gratuit</h2>
   <p>Communiquez-nous l'adresse de votre boutique : nous vous transmettons un rapport détaillé de vos non-conformités, sous 24&nbsp;h ouvrées, sans engagement.</p>
-  <form class="contact-form" onsubmit="return fauxEnvoi(event)">
+  <form class="contact-form" onsubmit="return envoyerDemande(event)">
     <input type="url" name="site" placeholder="https://votre-boutique.fr" required aria-label="Adresse de votre site">
     <input type="email" name="email" placeholder="Votre email professionnel" required aria-label="Votre email professionnel">
-    <button class="btn btn-p" type="submit">Recevoir mon diagnostic gratuit</button>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <button class="btn btn-p" type="submit" id="formBtn">Recevoir mon diagnostic gratuit</button>
   </form>
-  <p class="form-ok" id="formOk" hidden>✓ Merci. Nous revenons vers vous sous 24&nbsp;h ouvrées avec votre rapport.</p>
+  <p class="form-ok" id="formOk" role="status" aria-live="polite" hidden>✓ Merci. Nous revenons vers vous sous 24&nbsp;h ouvrées avec votre rapport.</p>
+  <p class="form-ok" id="formErr" role="alert" hidden>La demande n'a pas pu être transmise. Écrivez-nous directement à <a href="mailto:contact@allonorm.com" style="color:inherit"><strong>contact@allonorm.com</strong></a>.</p>
   <p style="margin-top:16px;font-size:.95rem;opacity:.9">ou directement : <a href="mailto:contact@allonorm.com" style="color:inherit"><strong>contact@allonorm.com</strong></a> · <strong>06 14 75 93 30</strong></p>
-  <p style="margin-top:6px;font-size:.78rem;opacity:.65">[Démo — formulaire à brancher sur Formspree/Web3Forms (gratuit) → livraison vers contact@allonorm.com.]</p>
 </div></div>
 
 <!-- Ce que vous recevez -->
@@ -86,10 +87,27 @@
 </div></footer>
 
 <script>
-function fauxEnvoi(e){
+async function envoyerDemande(e){
   e.preventDefault();
-  document.querySelector('.contact-form').hidden=true;
-  document.getElementById('formOk').hidden=false;
+  const form = e.target, btn = document.getElementById('formBtn');
+  btn.disabled = true; btn.textContent = 'Envoi en cours…';
+  const donnees = Object.fromEntries(new FormData(form));
+  donnees._subject = 'Demande de diagnostic — ' + (donnees.site || 'site non précisé');
+  donnees._template = 'table';
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/contact@allonorm.com', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify(donnees)
+    });
+    const rep = await r.json();
+    if (rep.success !== 'true' && rep.success !== true) throw new Error(rep.message);
+    form.hidden = true;
+    document.getElementById('formOk').hidden = false;
+  } catch (err) {
+    document.getElementById('formErr').hidden = false;
+    btn.disabled = false; btn.textContent = 'Recevoir mon diagnostic gratuit';
+  }
   return false;
 }
 </script>
