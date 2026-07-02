@@ -160,3 +160,6 @@ footer .legal{grid-column:1/-1;border-top:1px solid #33335c;padding-top:18px;col
   footer .wrap{grid-template-columns:1fr}
   .hero h1{font-size:1.9rem}
 }
+
+/* l attribut hidden doit toujours gagner (sinon .form-ok{display:inline-block} l ecrase) */
+[hidden]{display:none!important}
